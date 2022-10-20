@@ -61,6 +61,7 @@
     <Compile Include="Assets\Code\MainMenu.cs" />
     <Compile Include="Assets\Code\DroneEnemy.cs" />
     <Compile Include="Assets\Code\Shooting Gallery\ShootingGalleryExit.cs" />
+    <Compile Include="Assets\Code\TCObjectPool.cs" />
     <Compile Include="Assets\Code\GameController.cs" />
     <Compile Include="Assets\Code\Shooting Gallery\HudPoints.cs" />
     <Compile Include="Assets\Code\Level1Controller.cs" />
@@ -71,7 +72,7 @@
     <Compile Include="Assets\Code\Shooting Gallery\ShotingGalleryEntry.cs" />
     <Compile Include="Assets\Code\GameControllerData.cs" />
     <Compile Include="Assets\Code\LifeItem.cs" />
-    <Compile Include="Assets\Code\TCObjectPool.cs" />
+    <Compile Include="Assets\Code\Shooting Gallery\DummyTargetsScript.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Art Assets\Drones\Sci_fi_Drones\Read me.txt" />
