@@ -109,7 +109,8 @@ public class FPPlayerController : MonoBehaviour
         UpdateInputDebug();
 #endif
 
-
+        Debug.Log(m_Life);
+        Debug.Log(m_Shield);
         Vector3 l_RightDirection = transform.right;
         Vector3 l_ForwardDirection = transform.forward;
         Vector3 l_Direction = Vector3.zero;
@@ -254,6 +255,10 @@ public class FPPlayerController : MonoBehaviour
     public void AddLife(float Life)
     {
         m_Life = Mathf.Clamp(m_Life + Life, 0.0f, 1.0f);
+    }
+    public void RestLife()
+    {
+        m_Life = m_Life - 0.2f;
     }
     public void GetHit(float damage)
     {
