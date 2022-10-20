@@ -5,6 +5,8 @@ public class GameController : MonoBehaviour
     static GameController m_GameController = null;
     FPPlayerController m_Player;
     float m_PlayerLife;
+    float m_PlayerShield;
+    float m_DroneDamage;
 
     private void Start()
     {
@@ -38,7 +40,23 @@ public class GameController : MonoBehaviour
     {
         return m_PlayerLife;
     }
+    public void SetPLayerShield(float PlayerShield)
+    {
+        m_PlayerShield = PlayerShield;
+    }
+    public float GetPlayerShield()
+    {
+        return m_PlayerShield;
+    }
 
+    public void SetDroneDamage(float DroneDamage)
+    {
+        m_DroneDamage = DroneDamage;
+    }
+    public float GetDroneDamage()
+    {
+        return m_DroneDamage;
+    }
     public FPPlayerController GetPlayer()
     {
         return m_Player;

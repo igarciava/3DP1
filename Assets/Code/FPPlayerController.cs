@@ -61,6 +61,8 @@ public class FPPlayerController : MonoBehaviour
 
     [Header("Life")]
     public float m_Life;
+    public float m_Shield;
+    public float m_DroneDamage;
 
     [Header("HUD")]
     public Canvas HUD;
@@ -68,7 +70,9 @@ public class FPPlayerController : MonoBehaviour
 
     void Start()
     {
+        m_DroneDamage = GameController.GetGameController().GetDroneDamage();
         m_Life = GameController.GetGameController().GetPlayerLife();
+        m_Life = GameController.GetGameController().GetPlayerShield();
         GameController.GetGameController().SetPlayer(this);
         Debug.Log(m_Life);
         m_Yaw = transform.rotation.y;
@@ -250,6 +254,19 @@ public class FPPlayerController : MonoBehaviour
     public void AddLife(float Life)
     {
         m_Life = Mathf.Clamp(m_Life + Life, 0.0f, 1.0f);
+    }
+    public void GetHit(float damage)
+    {
+        
+        if (m_Shield > 0)
+        {
+            m_Shield = m_Shield - (damage * 0.75f);
+            m_Life = m_Life - (damage * 0.75f);
+        }
+        else
+        {
+            m_Life = m_Life - damage;
+        }
     }
     public void OnTriggerEnter(Collider other)
     {

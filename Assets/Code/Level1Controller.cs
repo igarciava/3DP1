@@ -7,7 +7,8 @@ public class Level1Controller : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.N))
         {
-            GameController.GetGameController().SetPLayerLife(0.3f);
+            GameController.GetGameController().SetPLayerLife(1.0f);
+            GameController.GetGameController().SetPLayerShield(1.0f);
             
         }SceneManager.LoadSceneAsync("Level 2 Scene");
     }

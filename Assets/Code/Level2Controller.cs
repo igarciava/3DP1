@@ -7,8 +7,9 @@ public class Level2Controller : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.N))
         {
-            GameController.GetGameController().SetPLayerLife(0.3f);
-
+            GameController.GetGameController().SetPLayerLife(1.0f);
+            GameController.GetGameController().SetPLayerShield(1.0f);
+            GameController.GetGameController().SetDroneDamage(0.2f);
         }
         SceneManager.LoadSceneAsync("MainMenuScene");
     }
