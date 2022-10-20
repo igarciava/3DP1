@@ -53,7 +53,7 @@
     <UnityVersion>2020.3.12f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio Tools for Unity\16.0\Analyzers\Microsoft.Unity.Analyzers.dll" />
+    <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Code\Item.cs" />
@@ -62,6 +62,7 @@
     <Compile Include="Assets\Code\DroneEnemy.cs" />
     <Compile Include="Assets\Code\Shooting Gallery\ShootingGalleryExit.cs" />
     <Compile Include="Assets\Code\TCObjectPool.cs" />
+    <Compile Include="Assets\Code\Shooting Gallery\DummyTargetsScript.cs" />
     <Compile Include="Assets\Code\GameController.cs" />
     <Compile Include="Assets\Code\Shooting Gallery\HudPoints.cs" />
     <Compile Include="Assets\Code\Level1Controller.cs" />
@@ -72,10 +73,17 @@
     <Compile Include="Assets\Code\Shooting Gallery\ShotingGalleryEntry.cs" />
     <Compile Include="Assets\Code\GameControllerData.cs" />
     <Compile Include="Assets\Code\LifeItem.cs" />
-    <Compile Include="Assets\Code\Shooting Gallery\DummyTargetsScript.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Terrain\scene1_assets\Conifers [BOTD]\Render Pipeline Support\Built-in RP\CTI Runtime Components\Shaders\CTI_LOD_Bark_Array_301.shader" />
+    <None Include="Assets\Terrain\scene1_assets\Conifers [BOTD]\Render Pipeline Support\Built-in RP\CTI Runtime Components\Shaders\CTI_LOD_Billboard_301.shader" />
     <None Include="Assets\Art Assets\Drones\Sci_fi_Drones\Read me.txt" />
+    <None Include="Assets\Terrain\scene1_assets\Conifers [BOTD]\Render Pipeline Support\Built-in RP\CTI Runtime Components\Shaders\Includes\CTI_BillboardVertex_301.cginc" />
+    <None Include="Assets\Terrain\scene1_assets\Conifers [BOTD]\Render Pipeline Support\Built-in RP\CTI Runtime Components\Shaders\Includes\CTI_TranslucentLighting_301.cginc" />
+    <None Include="Assets\Terrain\scene1_assets\Conifers [BOTD]\Render Pipeline Support\Built-in RP\CTI Runtime Components\Shaders\CTI_LOD_Bark_301.shader" />
+    <None Include="Assets\Terrain\scene1_assets\Conifers [BOTD]\Render Pipeline Support\Built-in RP\CTI Runtime Components\Shaders\Includes\CTI_indirect.cginc" />
+    <None Include="Assets\Terrain\scene1_assets\Conifers [BOTD]\Render Pipeline Support\Built-in RP\CTI Runtime Components\Shaders\CTI_LOD_Leaves_301.shader" />
+    <None Include="Assets\Terrain\scene1_assets\Conifers [BOTD]\Render Pipeline Support\Built-in RP\CTI Runtime Components\Shaders\Includes\CTI_Builtin4xTreeLibraryTumbling_301.cginc" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
