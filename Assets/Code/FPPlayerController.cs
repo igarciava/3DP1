@@ -61,12 +61,19 @@ public class FPPlayerController : MonoBehaviour
 
     [Header("Life")]
     public float m_Life;
+    float m_MaxLife = 1.0f;
     public float m_Shield;
     public float m_DroneDamage;
 
     [Header("HUD")]
     public Canvas HUD;
     public HudPoints PointCounter;
+    public DestroyDummy TheDummy;
+
+    [Header("Ammo")]
+    public int m_MaxAmmo = 50;
+    public int m_CurrentAmmo = 10;
+    public int m_TimesShot;
 
     void Start()
     {
@@ -109,8 +116,8 @@ public class FPPlayerController : MonoBehaviour
         UpdateInputDebug();
 #endif
 
-        Debug.Log(m_Life);
-        Debug.Log(m_Shield);
+        //Debug.Log(m_Life);
+        //Debug.Log(m_Shield);
         Vector3 l_RightDirection = transform.right;
         Vector3 l_ForwardDirection = transform.forward;
         Vector3 l_Direction = Vector3.zero;
@@ -187,7 +194,7 @@ public class FPPlayerController : MonoBehaviour
 
     private bool CanShoot()
     {
-        return !m_Shooting;
+        return !m_Shooting && m_TimesShot!=10;
     }
     
 
@@ -199,15 +206,19 @@ public class FPPlayerController : MonoBehaviour
         {
             if (l_RaycastHit.collider.tag == "DroneCollider")
             {
-                    l_RaycastHit.collider.GetComponent<HitCollider>()?.Hit();
+                l_RaycastHit.collider.GetComponent<HitCollider>()?.Hit();
             }
             if (l_RaycastHit.collider.tag == "Target")
             {
-                    PointCounter.AddPoint(25);
+                PointCounter.AddPoint(25);
+                TheDummy.NormalShot();
+                Debug.Log("normalshot: " + TheDummy.TimesShooted);
             }
             else if(l_RaycastHit.collider.tag == "SmallTarget")
             {
-                    PointCounter.AddPoint(50);
+                PointCounter.AddPoint(50);
+                TheDummy.HeadShot();
+                Debug.Log("headshot: " + TheDummy.TimesShooted);
             }
             
             CreateShootHitParticles(l_RaycastHit.collider, l_RaycastHit.point, l_RaycastHit.normal);
@@ -215,6 +226,14 @@ public class FPPlayerController : MonoBehaviour
 
         SetShootWeaponAnimation();
         //Debug.Log("ahora");
+        m_TimesShot++;
+    }
+    void Reload()
+    {
+        if(Input.GetKey(m_ReloadKeyCode))
+        {
+            m_TimesShot = 0;
+        }
     }
 
     private void CreateShootHitParticles(Collider _Collider, Vector3 Position, Vector3 Normal)
@@ -254,7 +273,12 @@ public class FPPlayerController : MonoBehaviour
     }
     public void AddLife(float Life)
     {
-        m_Life = Mathf.Clamp(m_Life + Life, 0.0f, 1.0f);
+        m_Life = Mathf.Clamp(m_Life + Life, 0.0f, m_MaxLife);
+    }
+
+    public void AddAmmo(int Ammo)
+    {
+
     }
     public void RestLife()
     {

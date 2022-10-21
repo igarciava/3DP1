@@ -16,7 +16,7 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - TrainingDummy
   - Water
   - UI
   - Player

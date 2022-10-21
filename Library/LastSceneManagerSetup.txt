@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Scenes/Level 1 Scene.unity
+- path: Assets/Scenes/AmmoScene.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0
