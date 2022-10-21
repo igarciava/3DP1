@@ -72,7 +72,7 @@ public class FPPlayerController : MonoBehaviour
     {
         m_DroneDamage = GameController.GetGameController().GetDroneDamage();
         m_Life = GameController.GetGameController().GetPlayerLife();
-        m_Life = GameController.GetGameController().GetPlayerShield();
+        m_Shield = GameController.GetGameController().GetPlayerShield();
         GameController.GetGameController().SetPlayer(this);
         Debug.Log(m_Life);
         m_Yaw = transform.rotation.y;
