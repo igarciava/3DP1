@@ -32,7 +32,7 @@ public class DroneEnemy : MonoBehaviour
     public Transform m_LifeBarAnchorPosition;
     RectTransform m_LifeBarRectTransform;
     float m_Life = 1.0f;
-    float m_Damage;
+   
 
     private void Awake()
     {
@@ -40,7 +40,7 @@ public class DroneEnemy : MonoBehaviour
     }
     private void Start()
     {
-        m_Damage = GameController.GetGameController().GetDroneDamage();
+       
         m_LifeBarImage.fillAmount = m_Life;
         SetIdleState();
     }
