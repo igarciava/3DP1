@@ -7,7 +7,7 @@ public class Trap : MonoBehaviour
     FPPlayerController m_Player;
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Trap")
+        if (other.tag == "Player")
         {
             m_Player.RestLife();
         }

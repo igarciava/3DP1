@@ -116,8 +116,8 @@ public class FPPlayerController : MonoBehaviour
         UpdateInputDebug();
 #endif
 
-        //Debug.Log(m_Life);
-        //Debug.Log(m_Shield);
+        Debug.Log(m_Life);
+        Debug.Log(m_Shield);
         Vector3 l_RightDirection = transform.right;
         Vector3 l_ForwardDirection = transform.forward;
         Vector3 l_Direction = Vector3.zero;

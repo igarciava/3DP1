@@ -5770,6 +5770,7 @@ GameObject:
   - component: {fileID: 1450308355}
   - component: {fileID: 1450308354}
   - component: {fileID: 1450308353}
+  - component: {fileID: 1450308357}
   m_Layer: 0
   m_Name: Cube (3)
   m_TagString: Trap
@@ -5853,6 +5854,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1450308357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1450308352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5313e3e24b450ca49a74fe3fdd74ce90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1483429767
 GameObject:
   m_ObjectHideFlags: 0
@@ -7665,6 +7678,9 @@ MonoBehaviour:
   HUD: {fileID: 1090475153}
   PointCounter: {fileID: 1090475155}
   TheDummy: {fileID: 4331357991339239045, guid: 0331b169005eb1d469455efaa6b9024a, type: 3}
+  m_MaxAmmo: 50
+  m_CurrentAmmo: 10
+  m_TimesShot: 0
 --- !u!4 &1887746758
 Transform:
   m_ObjectHideFlags: 0
