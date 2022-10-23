@@ -53,7 +53,7 @@
     <UnityVersion>2020.3.12f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
+    <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio Tools for Unity\16.0\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Code\Trap.cs" />
@@ -79,6 +79,8 @@
     <Compile Include="Assets\Code\GameControllerData.cs" />
     <Compile Include="Assets\Conifers [BOTD]\Render Pipeline Support\Built-in RP\CTI Runtime Components\Scripts\CTI_Utils.cs" />
     <Compile Include="Assets\Code\LifeItem.cs" />
+    <Compile Include="Assets\Code\Shooting Gallery\ResetGallery.cs" />
+    <Compile Include="Assets\Code\Shooting Gallery\ResetButton.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Terrain\scene1_assets\Conifers [BOTD]\Render Pipeline Support\Built-in RP\CTI Runtime Components\Shaders\CTI_LOD_Bark_Array_301.shader" />

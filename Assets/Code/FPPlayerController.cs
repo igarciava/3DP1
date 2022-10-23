@@ -189,6 +189,7 @@ public class FPPlayerController : MonoBehaviour
         if (Input.GetKey(m_ReloadKeyCode))
         {
             SetReloadAnimation();
+            Reload();
         }
     }
 
@@ -230,10 +231,7 @@ public class FPPlayerController : MonoBehaviour
     }
     void Reload()
     {
-        if(Input.GetKey(m_ReloadKeyCode))
-        {
-            m_TimesShot = 0;
-        }
+        m_TimesShot = 0;
     }
 
     private void CreateShootHitParticles(Collider _Collider, Vector3 Position, Vector3 Normal)
