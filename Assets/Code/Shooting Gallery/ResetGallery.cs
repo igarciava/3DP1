@@ -4,29 +4,15 @@ using UnityEngine;
 
 public class ResetGallery : MonoBehaviour
 {
-    public GameObject TheGalleryPrefab;
-    public ResetButton ResetButton;
-    Transform GalleryPosition;
-
-    // Start is called before the first frame update
-    void Start()
+    public ShotingGalleryEntry GalleryEntryScript;
+    public ShootingGalleryExit GalleryExitScript;
+    
+    private void OnTriggerEnter(Collider other)
     {
-        GalleryPosition = TheGalleryPrefab.transform;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (IsReset())
+        if(other.tag == "Player")
         {
-            Destroy(TheGalleryPrefab);
-            Instantiate(TheGalleryPrefab, GalleryPosition);
+            GalleryEntryScript.Restart();
+            GalleryExitScript.Restart();
         }
     }
-
-    bool IsReset()
-    {
-        return ResetButton.Reset;
-    }
-
 }

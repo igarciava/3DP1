@@ -9,6 +9,12 @@ public class ShootingGalleryExit : MonoBehaviour
     public MeshRenderer TheMesh;
     public Collider TheCollider;
 
+    private void Start()
+    {
+        TheMesh.enabled = true;
+        TheCollider.isTrigger = false;
+    }
+
     private void Update()
     {
         if(HasScored())
@@ -26,15 +32,21 @@ public class ShootingGalleryExit : MonoBehaviour
             StartCoroutine(EraseHudPoints());
         }
     }
+    IEnumerator EraseHudPoints()
+    {
+        yield return new WaitForSeconds(3.0f);
+        PointsScript.HasEntered = false;
+    }
 
     bool HasScored()
     {
         return PointsScript.PointCounter >= PointsNeeded;
     }
 
-    IEnumerator EraseHudPoints()
+
+    public void Restart()
     {
-        yield return new WaitForSeconds(3.0f);
-        PointsScript.HasEntered = false;
+        TheMesh.enabled = true;
+        TheCollider.isTrigger = false;
     }
 }

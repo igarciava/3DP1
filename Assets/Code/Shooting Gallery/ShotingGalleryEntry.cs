@@ -28,4 +28,10 @@ public class ShotingGalleryEntry : MonoBehaviour
         Collider.isTrigger = false;
         TheMesh.enabled = true;
     }
+
+    public void Restart()
+    {
+        TheMesh.enabled = false;
+        Collider.isTrigger = true;
+    }
 }

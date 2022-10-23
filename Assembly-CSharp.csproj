@@ -77,10 +77,10 @@
     <Compile Include="Assets\Code\Shooting Gallery\ShotingGalleryEntry.cs" />
     <Compile Include="Assets\Grass And Flowers Pack 1\Example Scene\SimpleTextureDrawing.cs" />
     <Compile Include="Assets\Code\GameControllerData.cs" />
+    <Compile Include="Assets\Code\Shooting Gallery\ResetGallery.cs" />
     <Compile Include="Assets\Conifers [BOTD]\Render Pipeline Support\Built-in RP\CTI Runtime Components\Scripts\CTI_Utils.cs" />
     <Compile Include="Assets\Code\LifeItem.cs" />
-    <Compile Include="Assets\Code\Shooting Gallery\ResetGallery.cs" />
-    <Compile Include="Assets\Code\Shooting Gallery\ResetButton.cs" />
+    <Compile Include="Assets\Code\DestroyDecall.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Terrain\scene1_assets\Conifers [BOTD]\Render Pipeline Support\Built-in RP\CTI Runtime Components\Shaders\CTI_LOD_Bark_Array_301.shader" />

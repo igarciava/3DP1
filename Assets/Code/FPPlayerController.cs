@@ -37,7 +37,6 @@ public class FPPlayerController : MonoBehaviour
 
     public float m_JumpSpeed = 10.0f;
 
-    bool m_Shooting = false;
 
     public KeyCode m_DebugLockAngleKeyCode = KeyCode.I;
     public KeyCode m_DebugLockKeyCode = KeyCode.O;
@@ -52,6 +51,7 @@ public class FPPlayerController : MonoBehaviour
     public LayerMask m_ShootingLayerMask;
     public GameObject m_DecalPrefab;
     TCObjectPool m_DecalsPool;
+    bool CanShoot = true;
 
     [Header("Animations")]
     public Animation m_Animation;
@@ -182,7 +182,7 @@ public class FPPlayerController : MonoBehaviour
             m_OnGround = false;
         }
 
-        if(Input.GetMouseButtonDown(0) && CanShoot())
+        if(Input.GetMouseButtonDown(0) && CanShoot)
         {
             Shoot();
         }
@@ -191,11 +191,6 @@ public class FPPlayerController : MonoBehaviour
             SetReloadAnimation();
             Reload();
         }
-    }
-
-    private bool CanShoot()
-    {
-        return !m_Shooting && m_TimesShot!=10;
     }
     
 
@@ -226,22 +221,33 @@ public class FPPlayerController : MonoBehaviour
         }
 
         SetShootWeaponAnimation();
-        //Debug.Log("ahora");
+        
         m_TimesShot++;
+        if(m_TimesShot >= 10)
+        {
+            CanShoot = false;
+        }
     }
     void Reload()
     {
         m_TimesShot = 0;
+        StartCoroutine(ShootAfterReload());
+    }
+
+    IEnumerator ShootAfterReload()
+    {
+        yield return new WaitForSeconds(m_ReloadAnimationClip.length);
+        CanShoot = true;
     }
 
     private void CreateShootHitParticles(Collider _Collider, Vector3 Position, Vector3 Normal)
     {
         //Debug.DrawRay(Position, Normal * 5.0f, Color.red, 2.0f);
-        //GameObject.Instantiate(m_DecalPrefab, Position, Quaternion.LookRotation(Normal));
-        GameObject l_Decal = m_DecalsPool.GetNextElement();
-        l_Decal.SetActive(true);
-        l_Decal.transform.position = Position;
-        l_Decal.transform.rotation = Quaternion.LookRotation(Normal);
+        GameObject.Instantiate(m_DecalPrefab, Position, Quaternion.LookRotation(Normal));
+        //GameObject l_Decal = m_DecalsPool.GetNextElement();
+        //l_Decal.SetActive(true);
+        //l_Decal.transform.position = Position;
+        //l_Decal.transform.rotation = Quaternion.LookRotation(Normal);
     }
 
     void SetIdleWeaponAnimation()
@@ -263,7 +269,7 @@ public class FPPlayerController : MonoBehaviour
     IEnumerator EndShoot()
     {
         yield return new WaitForSeconds(m_ShootAnimationClip.length);
-        m_Shooting = false;
+        
     }
     public float GetLife()
     {
@@ -278,6 +284,7 @@ public class FPPlayerController : MonoBehaviour
     {
 
     }
+
     public void RestLife()
     {
         m_Life = m_Life - 0.2f;

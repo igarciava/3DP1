@@ -8003,7 +8003,7 @@ GameObject:
   - component: {fileID: 239985856425804696}
   - component: {fileID: 7727809127805915084}
   - component: {fileID: 7339016075025583900}
-  - component: {fileID: 7989336092610114728}
+  - component: {fileID: 6085652870774342769}
   m_Layer: 0
   m_Name: ResetButton
   m_TagString: Untagged
@@ -8087,7 +8087,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7989336092610114728
+--- !u!114 &6085652870774342769
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8096,7 +8096,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 7731303860004539945}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3666e2334f2240842abd7eff12f9e161, type: 3}
+  m_Script: {fileID: 11500000, guid: ab1282821094dc249bf97f615d651c33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Reset: 0
+  GalleryEntryScript: {fileID: 3792437551661910717}
+  GalleryExitScript: {fileID: 3792437551592153623}
