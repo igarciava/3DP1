@@ -26,13 +26,24 @@ public class DroneEnemy : MonoBehaviour
     public LayerMask m_SightLayerMask;
     public float m_EyesHeight = 1.8f;
     public float m_EyesPlayerHeight = 1.8f;
+    public float m_rotationSpeed = 60.0f;
+    public float m_Speed = 10.0f;
+    public float m_MinDistance = 2.0f;
+    public float m_MaxDistance = 6.0f;
+    Vector3 m_PlayerPosition;
+    Vector3 m_DistanceBetween;
 
     [Header("UI")]
     public Image m_LifeBarImage;
     public Transform m_LifeBarAnchorPosition;
     //RectTransform m_LifeBarRectTransform;
     float m_Life = 1.0f;
+
+    //Attacking
+    public float m_TimeBetweenAttacks;
+    bool m_AlreadyAttacked;
     
+
 
     private void Awake()
     {
@@ -74,7 +85,9 @@ public class DroneEnemy : MonoBehaviour
         Vector3 l_PlayerPosition = GameController.GetGameController().GetPlayer().transform.position;
         Vector3 l_EyesPosition = transform.position + Vector3.up * m_EyesHeight;
         Vector3 l_PlayerEyesPosition = l_PlayerPosition + Vector3.up * m_EyesPlayerHeight;
-
+        Vector3 l_DistanceBetween = m_NavMeshAgent.transform.position - l_PlayerPosition;
+        m_PlayerPosition = l_PlayerPosition;
+        m_DistanceBetween = l_DistanceBetween;
         //UpdateLifeBarPoition();
     }
     void SetIdleState()
@@ -85,6 +98,7 @@ public class DroneEnemy : MonoBehaviour
     void UpdateIdleState()
     {
         SetPatrolState();
+        
     }
     void SetPatrolState()
     {
@@ -144,7 +158,7 @@ public class DroneEnemy : MonoBehaviour
     void UpdateAlertState()
     {
         m_NavMeshAgent.isStopped = true;
-        m_NavMeshAgent.transform.Rotate(Vector3.up * 60 * Time.deltaTime);
+        m_NavMeshAgent.transform.Rotate(Vector3.up * m_rotationSpeed * Time.deltaTime);
         if (SeesPlayers())
             SetChaseState();
     }
@@ -154,7 +168,12 @@ public class DroneEnemy : MonoBehaviour
     }
     void UpdateChaseState()
     {
+        m_NavMeshAgent.SetDestination(m_PlayerPosition);
 
+        if (m_DistanceBetween.x <= m_MinDistance)
+        {
+            SetAttackState();
+        }
     }
     void SetAttackState()
     {
@@ -162,7 +181,22 @@ public class DroneEnemy : MonoBehaviour
     }
     void UpdateAttackState()
     {
+        if(m_DistanceBetween.x<= m_MaxDistance)
+        {
+            m_NavMeshAgent.SetDestination(transform.position);
+            transform.LookAt(m_PlayerPosition);
 
+            if (m_AlreadyAttacked)
+            {
+                m_AlreadyAttacked = true;
+                Invoke(nameof(ResetAttack), m_TimeBetweenAttacks);
+            }
+        }
+    }
+
+    private void ResetAttack()
+    {
+        m_AlreadyAttacked = false;
     }
     void SetHitState()
     {
