@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ShotingGalleryEntry : MonoBehaviour
 {
-    public HudPoints PointsScript;
+    public HudScript PointsScript;
     public Collider Collider;
     public MeshRenderer TheMesh;
 

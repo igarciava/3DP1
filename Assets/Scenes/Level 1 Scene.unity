@@ -863,6 +863,7 @@ GameObject:
   - component: {fileID: 1090475152}
   - component: {fileID: 1090475151}
   - component: {fileID: 1090475155}
+  - component: {fileID: 1090475156}
   m_Layer: 5
   m_Name: HUD
   m_TagString: Untagged
@@ -927,7 +928,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -945,6 +946,7 @@ RectTransform:
   - {fileID: 2086206737}
   - {fileID: 1562255713}
   - {fileID: 1359058497}
+  - {fileID: 1288229113}
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -965,9 +967,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f56fb544ead2bb4cb14131ea7cdc4fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PointsText: {fileID: 1562255711}
   PointCounter: 0
-  Text: {fileID: 1562255711}
   HasEntered: 0
+  AmmoText: {fileID: 1288229111}
+--- !u!222 &1090475156
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1090475150}
+  m_CullTransparentMesh: 1
 --- !u!1 &1090935505
 GameObject:
   m_ObjectHideFlags: 0
@@ -1161,6 +1172,85 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d68032de0dc157f47bfca5f6de810368, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1288229110
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1288229113}
+  - component: {fileID: 1288229112}
+  - component: {fileID: 1288229111}
+  m_Layer: 5
+  m_Name: AmmoText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1288229111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1288229110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 121
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 134
+    m_Alignment: 3
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 10/50
+--- !u!222 &1288229112
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1288229110}
+  m_CullTransparentMesh: 1
+--- !u!224 &1288229113
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1288229110}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1090475154}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: -81, y: 67}
+  m_SizeDelta: {x: 482.57703, y: 137.30591}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1291413209
 GameObject:
   m_ObjectHideFlags: 0
@@ -1697,7 +1787,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 0.53598696, g: 1, b: 0.44716978, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2184,6 +2274,7 @@ MonoBehaviour:
   m_MaxAmmo: 50
   m_CurrentAmmo: 10
   m_TimesShot: 0
+  HasAKey: 0
 --- !u!4 &1887746758
 Transform:
   m_ObjectHideFlags: 0

@@ -30,9 +30,9 @@ public class DroneEnemy : MonoBehaviour
     [Header("UI")]
     public Image m_LifeBarImage;
     public Transform m_LifeBarAnchorPosition;
-    RectTransform m_LifeBarRectTransform;
+    //RectTransform m_LifeBarRectTransform;
     float m_Life = 1.0f;
-   
+    
 
     private void Awake()
     {
@@ -41,7 +41,7 @@ public class DroneEnemy : MonoBehaviour
     private void Start()
     {
        
-        m_LifeBarImage.fillAmount = m_Life;
+        //m_LifeBarImage.fillAmount = m_Life;
         SetIdleState();
     }
 
@@ -75,7 +75,7 @@ public class DroneEnemy : MonoBehaviour
         Vector3 l_EyesPosition = transform.position + Vector3.up * m_EyesHeight;
         Vector3 l_PlayerEyesPosition = l_PlayerPosition + Vector3.up * m_EyesPlayerHeight;
 
-        UpdateLifeBarPoition();
+        //UpdateLifeBarPoition();
     }
     void SetIdleState()
     {
@@ -97,6 +97,8 @@ public class DroneEnemy : MonoBehaviour
             MoveToNextTargetPosition();
         if (HearsPlayer())
             SetAlertState();
+
+        Debug.Log(PatrolTargetPositionArrived());
     }
     bool HearsPlayer()
     {
@@ -141,7 +143,10 @@ public class DroneEnemy : MonoBehaviour
     }
     void UpdateAlertState()
     {
-
+        m_NavMeshAgent.isStopped = true;
+        m_NavMeshAgent.transform.Rotate(Vector3.up * 60 * Time.deltaTime);
+        if (SeesPlayers())
+            SetChaseState();
     }
     void SetChaseState()
     {
@@ -178,13 +183,13 @@ public class DroneEnemy : MonoBehaviour
     public void Hit(float Life)
     {
         m_Life -= Life;
-        m_LifeBarImage.fillAmount = m_Life;
+        //m_LifeBarImage.fillAmount = m_Life;
         Debug.Log("hit life" + Life);
     }
-    void UpdateLifeBarPoition()
-    {
-        Vector3 l_Position = GameController.GetGameController().GetPlayer().m_Camera.WorldToScreenPoint(m_LifeBarAnchorPosition.position);
-        m_LifeBarRectTransform.anchoredPosition = new Vector3(l_Position.x * 1920.0f, - (1080.0f-l_Position.y*1080.0f), 0.0f);
+    //void UpdateLifeBarPoition()
+    //{
+    //    Vector3 l_Position = GameController.GetGameController().GetPlayer().m_Camera.WorldToScreenPoint(m_LifeBarAnchorPosition.position);
+    //    m_LifeBarRectTransform.anchoredPosition = new Vector3(l_Position.x * 1920.0f, - (1080.0f-l_Position.y*1080.0f), 0.0f);
 
-    }
+    //}
 }

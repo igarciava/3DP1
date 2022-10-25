@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ShootingGalleryExit : MonoBehaviour
 {
-    public HudPoints PointsScript;
+    public HudScript PointsScript;
     int PointsNeeded = 500;
     public MeshRenderer TheMesh;
     public Collider TheCollider;

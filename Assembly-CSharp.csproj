@@ -67,7 +67,7 @@
     <Compile Include="Assets\Code\TCObjectPool.cs" />
     <Compile Include="Assets\Code\Shooting Gallery\DummyTargetsScript.cs" />
     <Compile Include="Assets\Code\GameController.cs" />
-    <Compile Include="Assets\Code\Shooting Gallery\HudPoints.cs" />
+    <Compile Include="Assets\Code\Shooting Gallery\HudScript.cs" />
     <Compile Include="Assets\Code\Shooting Gallery\DestroyDummy.cs" />
     <Compile Include="Assets\Code\Level1Controller.cs" />
     <Compile Include="Assets\Code\AmmoItem.cs" />

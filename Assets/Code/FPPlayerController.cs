@@ -67,7 +67,7 @@ public class FPPlayerController : MonoBehaviour
 
     [Header("HUD")]
     public Canvas HUD;
-    public HudPoints PointCounter;
+    public HudScript PointCounter;
     public DestroyDummy TheDummy;
 
     [Header("Ammo")]
@@ -119,8 +119,8 @@ public class FPPlayerController : MonoBehaviour
         UpdateInputDebug();
 #endif
 
-        Debug.Log(m_Life);
-        Debug.Log(m_Shield);
+        //Debug.Log(m_Life);
+        //Debug.Log(m_Shield);
         Vector3 l_RightDirection = transform.right;
         Vector3 l_ForwardDirection = transform.forward;
         Vector3 l_Direction = Vector3.zero;
@@ -189,7 +189,7 @@ public class FPPlayerController : MonoBehaviour
         {
             Shoot();
         }
-        if (Input.GetKey(m_ReloadKeyCode))
+        if (Input.GetKey(m_ReloadKeyCode) && m_CurrentAmmo <= 0)
         {
             SetReloadAnimation();
             Reload();
@@ -226,6 +226,7 @@ public class FPPlayerController : MonoBehaviour
         SetShootWeaponAnimation();
         
         m_TimesShot++;
+        m_CurrentAmmo--;
         if(m_TimesShot >= 10)
         {
             CanShoot = false;
@@ -234,6 +235,8 @@ public class FPPlayerController : MonoBehaviour
     void Reload()
     {
         m_TimesShot = 0;
+        m_CurrentAmmo = 10;
+        m_MaxAmmo -= 10;
         StartCoroutine(ShootAfterReload());
     }
 
