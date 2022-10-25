@@ -75,6 +75,9 @@ public class FPPlayerController : MonoBehaviour
     public int m_CurrentAmmo = 10;
     public int m_TimesShot;
 
+    [Header("Keys")]
+    public bool HasAKey = false;
+
     void Start()
     {
         m_DroneDamage = GameController.GetGameController().GetDroneDamage();
