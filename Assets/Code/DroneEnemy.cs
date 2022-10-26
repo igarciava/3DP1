@@ -20,6 +20,7 @@ public class DroneEnemy : MonoBehaviour
     NavMeshAgent m_NavMeshAgent;
     FPPlayerController Player;
     public List<Transform> m_PatrolTargets;
+    HitCollider m_HitCollider;
     int m_CurrentPatrolTargetID = 0;
     public float m_HearingDistance = 1.0f;
     public float m_VisualConeAngle = 60.0f;
@@ -236,6 +237,12 @@ public class DroneEnemy : MonoBehaviour
         m_AlreadyAttacked = false;
     }
 
+    IEnumerator ResetHit()
+    {
+        yield return new WaitForSeconds(1.0f);
+        
+    }
+
     private void ResetAttack()
     {
         m_AlreadyAttacked = false;
@@ -246,7 +253,7 @@ public class DroneEnemy : MonoBehaviour
     }
     void UpdateHitState()
     {
-
+        StartCoroutine(ResetHit());
     }
     void SetDieState()
     {
@@ -254,11 +261,12 @@ public class DroneEnemy : MonoBehaviour
     }
     void UpdateDieState()
     {
-
+        m_NavMeshAgent.
     }
     public void Hit(float Life)
     {
         m_Life -= Life;
+        SetHitState();
         //m_LifeBarImage.fillAmount = m_Life;
         Debug.Log("hit life" + Life);
     }
