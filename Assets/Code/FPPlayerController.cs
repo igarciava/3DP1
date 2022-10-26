@@ -45,6 +45,7 @@ public class FPPlayerController : MonoBehaviour
 
     Vector3 m_StartPosition;
     Quaternion m_StartRotation;
+    public Slider slider;
 
     [Header("Shoot")]
     public float m_MaxShootDistance = 50.0f;
@@ -64,6 +65,7 @@ public class FPPlayerController : MonoBehaviour
     float m_MaxLife = 1.0f;
     public float m_Shield;
     public float m_DroneDamage;
+    public float m_CurrentHealth;
 
     [Header("HUD")]
     public Canvas HUD;
@@ -82,6 +84,7 @@ public class FPPlayerController : MonoBehaviour
     {
         m_DroneDamage = GameController.GetGameController().GetDroneDamage();
         m_Life = GameController.GetGameController().GetPlayerLife();
+        m_MaxLife = m_Life;
         m_Shield = GameController.GetGameController().GetPlayerShield();
         GameController.GetGameController().SetPlayer(this);
         Debug.Log(m_Life);
@@ -93,6 +96,8 @@ public class FPPlayerController : MonoBehaviour
         m_StartPosition = transform.position;
         m_StartRotation = transform.rotation;
         m_DecalsPool = new TCObjectPool(5, m_DecalPrefab);
+        m_CurrentHealth = m_MaxLife;
+        SetMaxHealth(m_MaxLife);
     }
 
 #if UNITY_EDITOR
@@ -291,22 +296,11 @@ public class FPPlayerController : MonoBehaviour
 
     }
 
-    public void RestLife()
+    
+    public void TakeDamage(float damage)
     {
-        m_Life = m_Life - 0.2f;
-    }
-    public void GetHit(float damage)
-    {
-        
-        if (m_Shield > 0)
-        {
-            m_Shield = m_Shield - (damage * 0.75f);
-            m_Life = m_Life - (damage * 0.75f);
-        }
-        else
-        {
-            m_Life = m_Life - damage;
-        }
+        m_CurrentHealth -= damage;
+        SetHealth(m_CurrentHealth);
     }
     public void OnTriggerEnter(Collider other)
     {
@@ -332,5 +326,16 @@ public class FPPlayerController : MonoBehaviour
         transform.position = m_StartPosition;
         transform.rotation = m_StartRotation;
         m_CharacterController.enabled = true;
+    }
+
+    public void SetMaxHealth(float health)
+    {
+        slider.maxValue = health;
+        slider.value = health;
+    }
+
+    public void SetHealth(float health)
+    {
+        slider.value = health;
     }
 }

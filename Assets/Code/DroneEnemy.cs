@@ -18,6 +18,7 @@ public class DroneEnemy : MonoBehaviour
     }
     public TState m_State;
     NavMeshAgent m_NavMeshAgent;
+    FPPlayerController Player;
     public List<Transform> m_PatrolTargets;
     int m_CurrentPatrolTargetID = 0;
     public float m_HearingDistance = 2.0f;
@@ -40,7 +41,7 @@ public class DroneEnemy : MonoBehaviour
     float m_Life = 1.0f;
 
     //Attacking
-    public float m_TimeBetweenAttacks;
+    public float m_TimeBetweenAttacks = 1.0f;
     bool m_AlreadyAttacked;
     
 
@@ -185,7 +186,7 @@ public class DroneEnemy : MonoBehaviour
         {
             m_NavMeshAgent.SetDestination(transform.position);
             transform.LookAt(m_PlayerPosition);
-
+            Player.TakeDamage(0.2f);
             if (m_AlreadyAttacked)
             {
                 m_AlreadyAttacked = true;
