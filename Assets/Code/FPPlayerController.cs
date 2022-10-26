@@ -36,6 +36,7 @@ public class FPPlayerController : MonoBehaviour
     bool m_OnGround = true;
 
     public float m_JumpSpeed = 10.0f;
+    
 
 
     public KeyCode m_DebugLockAngleKeyCode = KeyCode.I;
@@ -45,7 +46,8 @@ public class FPPlayerController : MonoBehaviour
 
     Vector3 m_StartPosition;
     Quaternion m_StartRotation;
-    public Slider slider;
+    public Slider m_HealthSlider;
+    public Slider m_ShieldSlider;
 
     [Header("Shoot")]
     public float m_MaxShootDistance = 50.0f;
@@ -64,8 +66,10 @@ public class FPPlayerController : MonoBehaviour
     public float m_Life;
     float m_MaxLife = 1.0f;
     public float m_Shield;
+    float m_MaxShield = 1.0f;
     public float m_DroneDamage;
-    public float m_CurrentHealth = 5.0f;
+    public float m_CurrentHealth;
+    public float m_CurrentShield;
 
     [Header("HUD")]
     public Canvas HUD;
@@ -86,6 +90,7 @@ public class FPPlayerController : MonoBehaviour
         m_Life = GameController.GetGameController().GetPlayerLife();
         m_MaxLife = m_Life;
         m_Shield = GameController.GetGameController().GetPlayerShield();
+        m_MaxShield = m_Shield;
         GameController.GetGameController().SetPlayer(this);
         Debug.Log(m_Life);
         m_Yaw = transform.rotation.y;
@@ -98,6 +103,8 @@ public class FPPlayerController : MonoBehaviour
         m_DecalsPool = new TCObjectPool(5, m_DecalPrefab);
         m_CurrentHealth = m_MaxLife;
         SetMaxHealth(m_MaxLife);
+        SetMaxShield(m_MaxShield);
+        
     }
 
 #if UNITY_EDITOR
@@ -199,6 +206,7 @@ public class FPPlayerController : MonoBehaviour
             SetReloadAnimation();
             Reload();
         }
+        
     }
     
 
@@ -299,8 +307,19 @@ public class FPPlayerController : MonoBehaviour
     
     public void TakeDamage(float damage)
     {
-        m_CurrentHealth -= damage;
+        if (m_CurrentShield != 0)
+        {
+            m_CurrentShield -= (damage * 0.75f);
+            m_CurrentHealth -= (damage * 0.25f);
+        }
+        else
+        {
+            m_CurrentHealth -= damage;
+        }
+        
+
         SetHealth(m_CurrentHealth);
+        SetShield(m_CurrentShield);
     }
     public void OnTriggerEnter(Collider other)
     {
@@ -330,12 +349,25 @@ public class FPPlayerController : MonoBehaviour
 
     public void SetMaxHealth(float health)
     {
-        slider.maxValue = health;
-        slider.value = health;
+        m_HealthSlider.maxValue = health;
+        m_HealthSlider.value = health;
     }
 
     public void SetHealth(float health)
     {
-        slider.value = health;
+        m_HealthSlider.value = health;
     }
+
+    public void SetMaxShield(float shield)
+    {
+        m_ShieldSlider.maxValue = shield;
+        m_ShieldSlider.value = shield;
+    }
+
+    public void SetShield(float shield)
+    {
+        m_ShieldSlider.value = shield;
+    }
+
+   
 }
