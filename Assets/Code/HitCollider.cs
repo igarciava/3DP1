@@ -2,11 +2,11 @@
 
 public class HitCollider : MonoBehaviour
 {
-    public float m_Life;
+    public float m_LifeDealt;
 
     public DroneEnemy m_DroneEnemy;
     public void Hit()
     {
-        m_DroneEnemy.Hit(m_Life);
+        m_DroneEnemy.Hit(m_LifeDealt);
     }
 }

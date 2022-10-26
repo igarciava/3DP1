@@ -22,7 +22,7 @@ public class DroneEnemy : MonoBehaviour
     public List<Transform> m_PatrolTargets;
     HitCollider m_HitCollider;
     int m_CurrentPatrolTargetID = 0;
-    public float m_HearingDistance = 1.0f;
+    public float m_HearingDistance;
     public float m_VisualConeAngle = 60.0f;
     public float m_SightDistance = 8.0f;
     public LayerMask m_SightLayerMask;
@@ -31,14 +31,17 @@ public class DroneEnemy : MonoBehaviour
     public float m_rotationSpeed = 60.0f;
     public float m_Speed = 10.0f;
 
-    Vector3 AttackDistance = new Vector3(3, 3);
+    ParticleSystem DyingParticles;
+
     Vector3 m_PlayerPosition;
     Vector3 m_DistanceBetween;
 
-    [Header("UI")]
-    public Image m_LifeBarImage;
-    public Transform m_LifeBarAnchorPosition;
-    //RectTransform m_LifeBarRectTransform;
+    float DistanceForAttacking = 2.0f;
+
+    //[Header("UI")]
+    //public Image m_LifeBarImage;
+    //public Transform m_LifeBarAnchorPosition;
+    ////RectTransform m_LifeBarRectTransform;
     float m_Life = 1.0f;
 
     //Attacking
@@ -55,6 +58,8 @@ public class DroneEnemy : MonoBehaviour
     {
         Player = GameObject.FindGameObjectWithTag("Player").GetComponent<FPPlayerController>();
         //m_LifeBarImage.fillAmount = m_Life;
+        DyingParticles = gameObject.GetComponentInChildren<ParticleSystem>();
+        DyingParticles.Pause();
         SetIdleState();
     }
 
@@ -92,6 +97,7 @@ public class DroneEnemy : MonoBehaviour
         m_DistanceBetween = l_DistanceBetween;
         //UpdateLifeBarPoition();
 
+        Dying();
         
         Debug.DrawLine(l_EyesPosition, l_PlayerEyesPosition, SeesPlayer() ? Color.red : Color.blue);
     }
@@ -172,36 +178,38 @@ public class DroneEnemy : MonoBehaviour
     void UpdateAlertState()
     {
         m_NavMeshAgent.isStopped = true;
-        m_NavMeshAgent.transform.Rotate(Vector3.up * 60 * Time.deltaTime);
+        m_NavMeshAgent.transform.Rotate(Vector3.up * m_rotationSpeed * Time.deltaTime);
         if (SeesPlayer())
         {
-            transform.LookAt(m_PlayerPosition);
             SetChaseState();
             Debug.Log("lo ve");
         }
+        if(HearsPlayer())
+        {
+            m_NavMeshAgent.transform.Rotate(Vector3.up * m_rotationSpeed * Time.deltaTime);
+
+            if(SeesPlayer())
+            {
+                SetAttackState();
+            }
+        }
         else
         {
-            KeepPatrolling();
+            StartCoroutine(KeepPatrolling());
         }
-    }
-    IEnumerator KeepPatrolling()
-    {
-        yield return new WaitForSeconds(3.0f);
-        m_NavMeshAgent.isStopped = false;
-        SetPatrolState();
     }
 
     void SetChaseState()
     {
         m_State = TState.CHASE;
+        m_NavMeshAgent.transform.LookAt(m_PlayerPosition);
     }
     void UpdateChaseState()
     {
         m_NavMeshAgent.isStopped = false;
-        m_NavMeshAgent.SetDestination(m_PlayerPosition);
-        transform.LookAt(m_PlayerPosition);
+        m_NavMeshAgent.destination = m_PlayerPosition;
 
-        if (m_DistanceBetween.x <= AttackDistance.x && m_DistanceBetween.y <= AttackDistance.y)
+        if (Vector3.Distance(m_NavMeshAgent.transform.position, m_PlayerPosition) <= DistanceForAttacking)
         {
             SetAttackState();
         }
@@ -213,9 +221,8 @@ public class DroneEnemy : MonoBehaviour
     }
     void UpdateAttackState()
     {
-        if(Vector3.Distance(m_NavMeshAgent.transform.position, m_PlayerPosition) <= 4)
+        if(Vector3.Distance(m_NavMeshAgent.transform.position, m_PlayerPosition) <= DistanceForAttacking)
         {
-            
             transform.LookAt(m_PlayerPosition);
             
             if(!m_AlreadyAttacked)
@@ -231,22 +238,6 @@ public class DroneEnemy : MonoBehaviour
         }
     }
 
-    IEnumerator ResetDronAttack()
-    {
-        yield return new WaitForSeconds(m_TimeBetweenAttacks);
-        m_AlreadyAttacked = false;
-    }
-
-    IEnumerator ResetHit()
-    {
-        yield return new WaitForSeconds(1.0f);
-        
-    }
-
-    private void ResetAttack()
-    {
-        m_AlreadyAttacked = false;
-    }
     void SetHitState()
     {
         m_State = TState.HIT;
@@ -261,14 +252,24 @@ public class DroneEnemy : MonoBehaviour
     }
     void UpdateDieState()
     {
-        m_NavMeshAgent.
+        DyingParticles.Play();
+        Destroy(gameObject, 1.0f);
     }
-    public void Hit(float Life)
+    public void Hit(float LifeDealt)
     {
-        m_Life -= Life;
+        m_Life -= LifeDealt;
         SetHitState();
         //m_LifeBarImage.fillAmount = m_Life;
-        Debug.Log("hit life" + Life);
+        Debug.Log("hit life" + LifeDealt);
+    }
+
+    void Dying()
+    {
+        if(m_Life <= 0)
+        {
+            DyingParticles.Play();
+            SetDieState();
+        }
     }
     //void UpdateLifeBarPoition()
     //{
@@ -276,4 +277,26 @@ public class DroneEnemy : MonoBehaviour
     //    m_LifeBarRectTransform.anchoredPosition = new Vector3(l_Position.x * 1920.0f, - (1080.0f-l_Position.y*1080.0f), 0.0f);
 
     //}
+    IEnumerator KeepPatrolling()
+    {
+        yield return new WaitForSeconds(6.0f);
+        m_NavMeshAgent.isStopped = false;
+        SetPatrolState();
+    }
+    //IEnumerator KeepChasing()
+    //{
+    //    yield return new WaitForSeconds(1.0f);
+    //    m_NavMeshAgent.isStopped = false;
+    //    SetChaseState();
+    //}
+    IEnumerator ResetDronAttack()
+    {
+        yield return new WaitForSeconds(m_TimeBetweenAttacks);
+        m_AlreadyAttacked = false;
+    }
+    IEnumerator ResetHit()
+    {
+        yield return new WaitForSeconds(1.0f);
+
+    }
 }
