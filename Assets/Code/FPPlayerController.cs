@@ -65,7 +65,7 @@ public class FPPlayerController : MonoBehaviour
     float m_MaxLife = 1.0f;
     public float m_Shield;
     public float m_DroneDamage;
-    public float m_CurrentHealth;
+    public float m_CurrentHealth = 5.0f;
 
     [Header("HUD")]
     public Canvas HUD;
@@ -194,7 +194,7 @@ public class FPPlayerController : MonoBehaviour
         {
             Shoot();
         }
-        if (Input.GetKey(m_ReloadKeyCode) && m_CurrentAmmo <= 0)
+        if (Input.GetKey(m_ReloadKeyCode) && m_CurrentAmmo <= 0 && m_MaxAmmo > 0)
         {
             SetReloadAnimation();
             Reload();

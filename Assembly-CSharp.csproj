@@ -62,7 +62,7 @@
     <Compile Include="Assets\Code\MainMenu.cs" />
     <Compile Include="Assets\Code\DroneEnemy.cs" />
     <Compile Include="Assets\Code\Shooting Gallery\ShootingGalleryExit.cs" />
-    <Compile Include="Assets\Code\DoorScript.cs" />
+    <Compile Include="Assets\Code\Shooting Gallery\DoorScript.cs" />
     <Compile Include="Assets\Code\TCObjectPool.cs" />
     <Compile Include="Assets\Code\Shooting Gallery\DummyTargetsScript.cs" />
     <Compile Include="Assets\Code\GameController.cs" />
@@ -73,7 +73,7 @@
     <Compile Include="Assets\Code\DestroyOnTime.cs" />
     <Compile Include="Assets\Code\DestroyDecall.cs" />
     <Compile Include="Assets\Code\FPPlayerController.cs" />
-    <Compile Include="Assets\Code\KeyScript.cs" />
+    <Compile Include="Assets\Code\Shooting Gallery\KeyScript.cs" />
     <Compile Include="Assets\Code\Level2Controller.cs" />
     <Compile Include="Assets\Code\DroneScript.cs" />
     <Compile Include="Assets\Code\Shooting Gallery\ShotingGalleryEntry.cs" />
