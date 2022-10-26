@@ -158,7 +158,7 @@ public class DroneEnemy : MonoBehaviour
     void UpdateAlertState()
     {
         m_NavMeshAgent.isStopped = true;
-        m_NavMeshAgent.transform.Rotate(Vector3.up * m_rotationSpeed * Time.deltaTime);
+        transform.LookAt(m_PlayerPosition);
         if (SeesPlayers())
             SetChaseState();
     }
@@ -191,6 +191,10 @@ public class DroneEnemy : MonoBehaviour
                 m_AlreadyAttacked = true;
                 Invoke(nameof(ResetAttack), m_TimeBetweenAttacks);
             }
+        }
+        else
+        {
+            SetChaseState();
         }
     }
 
