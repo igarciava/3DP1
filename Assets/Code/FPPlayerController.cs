@@ -249,7 +249,8 @@ public class FPPlayerController : MonoBehaviour
     {
         m_TimesShot = 0;
         m_CurrentAmmo = 10;
-        m_MaxAmmo -= 10;
+        if(m_MaxAmmo != 0)
+            m_MaxAmmo -= 10;
         StartCoroutine(ShootAfterReload());
     }
 
@@ -294,20 +295,31 @@ public class FPPlayerController : MonoBehaviour
     {
         return m_Life;
     }
+    public int GetAmmo()
+    {
+        return m_MaxAmmo;
+    }
+    public float GetShield()
+    {
+        return m_Shield;
+    }
     public void AddLife(float Life)
     {
         m_Life = Mathf.Clamp(m_Life + Life, 0.0f, m_MaxLife);
     }
-
     public void AddAmmo(int Ammo)
     {
-
+        m_MaxAmmo += Ammo;
+    }
+    public void AddShield(float Shield)
+    {
+        m_Shield = Mathf.Clamp(m_Shield + Shield, 0.0f, m_MaxShield);
     }
 
-    
+
     public void TakeDamage(float damage)
     {
-        if (m_CurrentShield != 0)
+        if (m_CurrentShield != 0 && m_CurrentShield > 0)
         {
             m_CurrentShield -= (damage * 0.75f);
             m_CurrentHealth -= (damage * 0.25f);
@@ -323,11 +335,12 @@ public class FPPlayerController : MonoBehaviour
     }
     public void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Item")
+        if (other.tag == "Item")
         {
             other.GetComponent<Item>().Pick(this);
+            Debug.Log("a");
         }
-        else if(other.tag == "DeadZone")
+        else if (other.tag == "DeadZone")
         {
             Kill();
         }

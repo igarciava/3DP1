@@ -42,10 +42,10 @@ public class DroneEnemy : MonoBehaviour
     //public Image m_LifeBarImage;
     //public Transform m_LifeBarAnchorPosition;
     ////RectTransform m_LifeBarRectTransform;
-    float m_Life = 1.0f;
+    public float m_Life = 1.0f;
 
     //Attacking
-    public float m_TimeBetweenAttacks = 3.0f;
+    public float m_TimeBetweenAttacks = 2.0f;
     bool m_AlreadyAttacked = false;
     
 
@@ -120,6 +120,7 @@ public class DroneEnemy : MonoBehaviour
     void SetPatrolState()
     {
         m_State = TState.PATROL;
+        m_NavMeshAgent.isStopped = false;
         m_NavMeshAgent.destination = m_PatrolTargets[m_CurrentPatrolTargetID].position;
     }
     void UpdatePatrolState()
@@ -244,6 +245,7 @@ public class DroneEnemy : MonoBehaviour
     }
     void UpdateHitState()
     {
+        m_NavMeshAgent.isStopped = true;
         StartCoroutine(ResetHit());
     }
     void SetDieState()
@@ -297,6 +299,6 @@ public class DroneEnemy : MonoBehaviour
     IEnumerator ResetHit()
     {
         yield return new WaitForSeconds(1.0f);
-
+        SetPatrolState();
     }
 }
