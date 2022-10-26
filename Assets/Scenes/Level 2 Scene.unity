@@ -6500,8 +6500,6 @@ MonoBehaviour:
   m_EyesPlayerHeight: 1.8
   m_rotationSpeed: 60
   m_Speed: 10
-  m_MinDistance: 2
-  m_MaxDistance: 6
   m_LifeBarImage: {fileID: 0}
   m_LifeBarAnchorPosition: {fileID: 0}
   m_TimeBetweenAttacks: 0
@@ -22797,6 +22795,10 @@ PrefabInstance:
       propertyPath: m_LocalRotation.y
       value: -0
       objectReference: {fileID: 0}
+    - target: {fileID: 64460096866323844, guid: beb24022f1709b04e81298f9a1fbeca6, type: 3}
+      propertyPath: m_Convex
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: beb24022f1709b04e81298f9a1fbeca6, type: 3}
 --- !u!4 &1879460652 stripped
@@ -22859,8 +22861,6 @@ MonoBehaviour:
   m_EyesPlayerHeight: 1.8
   m_rotationSpeed: 60
   m_Speed: 10
-  m_MinDistance: 0.2
-  m_MaxDistance: 0.6
   m_LifeBarImage: {fileID: 0}
   m_LifeBarAnchorPosition: {fileID: 0}
   m_TimeBetweenAttacks: 0

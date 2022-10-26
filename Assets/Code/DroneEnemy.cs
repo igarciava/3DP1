@@ -29,8 +29,8 @@ public class DroneEnemy : MonoBehaviour
     public float m_EyesPlayerHeight = 1.8f;
     public float m_rotationSpeed = 60.0f;
     public float m_Speed = 10.0f;
-    public float m_MinDistance = 2.0f;
-    public float m_MaxDistance = 6.0f;
+
+    Vector3 AttackDistance = new Vector3(3, 3);
     Vector3 m_PlayerPosition;
     Vector3 m_DistanceBetween;
 
@@ -90,6 +90,13 @@ public class DroneEnemy : MonoBehaviour
         m_PlayerPosition = l_PlayerPosition;
         m_DistanceBetween = l_DistanceBetween;
         //UpdateLifeBarPoition();
+
+    }
+
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(gameObject.transform.position, m_HearingDistance);
     }
     void SetIdleState()
     {
@@ -161,7 +168,7 @@ public class DroneEnemy : MonoBehaviour
         m_NavMeshAgent.isStopped = true;
         transform.LookAt(m_PlayerPosition);
         if (SeesPlayers())
-            SetChaseState();
+            SetChaseState(); Debug.Log("lo ve");
     }
     void SetChaseState()
     {
@@ -171,10 +178,10 @@ public class DroneEnemy : MonoBehaviour
     {
         m_NavMeshAgent.SetDestination(m_PlayerPosition);
 
-        if (m_DistanceBetween.x <= m_MinDistance)
-        {
-            SetAttackState();
-        }
+        //if (m_DistanceBetween.x <= AttackDistance.x && m_DistanceBetween.y <= AttackDistance.y)
+        //{
+        //    SetAttackState();
+        //}
     }
     void SetAttackState()
     {
@@ -182,7 +189,7 @@ public class DroneEnemy : MonoBehaviour
     }
     void UpdateAttackState()
     {
-        if(m_DistanceBetween.x<= m_MaxDistance)
+        if(m_DistanceBetween.x <= AttackDistance.x && m_DistanceBetween.y <= AttackDistance.y)
         {
             m_NavMeshAgent.SetDestination(transform.position);
             transform.LookAt(m_PlayerPosition);
